@@ -35,9 +35,10 @@ const toggleDetailsDiv = (displayStyle) => {
 const dislplayDetails = (phoneDetails) => {
   // console.log(phoneDetails);
   const exploreDetails = document.getElementById('explore-details');
+  exploreDetails.textContent = '';
   const div = document.createElement('div');
   div.innerHTML = `
-        <img style="width: 300px; height: 280px; padding: 10px 0px 0px 10px;" src="${
+        <img style="width: 200px; height: 250px; padding: 10px 0px 0px 10px;" src="${
           phoneDetails.image
         }" class="card-img-top img-fluid" alt="..." />
         <h3 class="card-title">Name: ${phoneDetails.name}</h3>
@@ -60,7 +61,7 @@ const displaySearchResult = (phones) => {
     const noResultError = document.getElementById('no-result-error');
     const div = document.createElement('div');
     div.innerHTML = `
-    <h1>No Result Found</h1>
+      <h1>No Result Found</h1>
     `;
     noResultError.appendChild(div);
   } else {
@@ -70,7 +71,7 @@ const displaySearchResult = (phones) => {
       div.classList.add('col');
       div.innerHTML = `
         <div class="card h-100">
-            <img style="padding: 10px 0px 0px 10px;" src="${phone.image}" class="card-img-top h-75 w-75 img-fluid" alt="..." />
+            <img style="width: 220px; height: 280px; padding: 10px 0px 0px 10px;" src="${phone.image}" class="card-img-top img-fluid" alt="..." />
             <div class="card-body">
             <h5 class="card-title">${phone.phone_name}</h5>
             </div>
