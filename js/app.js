@@ -26,9 +26,14 @@ const exploreDetails = (phoneId) => {
     .then((data) => dislplayDetails(data.data));
 };
 
+// Toggle display details div
+const toggleDetailsDiv = (displayStyle) => {
+  document.getElementById('toggle-details-div').style.display = displayStyle;
+};
+
 // display details
 const dislplayDetails = (phoneDetails) => {
-  console.log(phoneDetails);
+  // console.log(phoneDetails);
   const exploreDetails = document.getElementById('explore-details');
   const div = document.createElement('div');
   div.innerHTML = `
@@ -42,6 +47,7 @@ const dislplayDetails = (phoneDetails) => {
         }</h4>
         `;
   exploreDetails.appendChild(div);
+  toggleDetailsDiv('block');
 };
 
 // display search result
