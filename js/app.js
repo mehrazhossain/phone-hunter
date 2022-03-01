@@ -20,7 +20,6 @@ const searchPhone = () => {
 // explore more details
 const exploreDetails = (phoneId) => {
   const url = `https://openapi.programming-hero.com/api/phone/${phoneId}`;
-  console.log(url);
   fetch(url)
     .then((res) => res.json())
     .then((data) => dislplayDetails(data.data));
@@ -33,19 +32,39 @@ const toggleDetailsDiv = (displayStyle) => {
 
 // display details
 const dislplayDetails = (phoneDetails) => {
-  // console.log(phoneDetails);
+  // Sensor information
+  var text = '';
+  var sensorData = phoneDetails.mainFeatures.sensors;
+  sensorData.forEach(testFunc);
+  function testFunc(value) {
+    text = text + value + ' ';
+  }
+  //   explore details
   const exploreDetails = document.getElementById('explore-details');
   exploreDetails.textContent = '';
   const div = document.createElement('div');
   div.innerHTML = `
-        <img style="width: 200px; height: 250px; padding: 10px 0px 0px 10px;" src="${
+        <img style="width: 200px; height: 250px; padding: 10px 0px 10px 10px;" src="${
           phoneDetails.image
         }" class="card-img-top img-fluid" alt="..." />
-        <h3 class="card-title">Name: ${phoneDetails.name}</h3>
-        <h3>Brand: ${phoneDetails.brand}</h3> 
-        <h4>Release Date: ${
-          phoneDetails.releaseDate ? phoneDetails.releaseDate : 'undefined'
-        }</h4>
+        <h5 class="card-title">Name: ${phoneDetails.name}</h5>
+        <span class="d-block">Brand: ${phoneDetails.brand}</span> 
+        <span class="d-block">Release Date: ${
+          phoneDetails.releaseDate
+            ? phoneDetails.releaseDate
+            : 'No release date found'
+        }</span>
+        <span class="d-block">Storage: ${
+          phoneDetails.mainFeatures.storage
+        }</span>
+        <span class="d-block">Display Size: ${
+          phoneDetails.mainFeatures.displaySize
+        }</span>
+        <span class="d-block">Chipset: ${
+          phoneDetails.mainFeatures.chipSet
+        }</span>
+        <span class="d-block">Memory: ${phoneDetails.mainFeatures.memory}</span>
+        <span class="d-block">Sensors: ${text}</span>
         `;
   exploreDetails.appendChild(div);
   toggleDetailsDiv('block');
@@ -54,7 +73,6 @@ const dislplayDetails = (phoneDetails) => {
 // display search result
 const displaySearchResult = (phones) => {
   const searchResult = document.getElementById('search-result');
-  //   console.log(phones);
   //   clear search result div
   searchResult.textContent = '';
   if (phones == '') {
@@ -66,7 +84,6 @@ const displaySearchResult = (phones) => {
     noResultError.appendChild(div);
   } else {
     for (const phone of phones) {
-      // console.log(phone);
       const div = document.createElement('div');
       div.classList.add('col');
       div.innerHTML = `
