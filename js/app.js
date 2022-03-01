@@ -17,11 +17,37 @@ const searchPhone = () => {
   }
   searchField.value = '';
 };
+// explore more details
+const exploreDetails = (phoneId) => {
+  const url = `https://openapi.programming-hero.com/api/phone/${phoneId}`;
+  console.log(url);
+  fetch(url)
+    .then((res) => res.json())
+    .then((data) => dislplayDetails(data.data));
+};
+
+// display details
+const dislplayDetails = (phoneDetails) => {
+  console.log(phoneDetails);
+  const exploreDetails = document.getElementById('explore-details');
+  const div = document.createElement('div');
+  div.innerHTML = `
+        <img style="width: 300px; height: 280px; padding: 10px 0px 0px 10px;" src="${
+          phoneDetails.image
+        }" class="card-img-top img-fluid" alt="..." />
+        <h3 class="card-title">Name: ${phoneDetails.name}</h3>
+        <h3>Brand: ${phoneDetails.brand}</h3> 
+        <h4>Release Date: ${
+          phoneDetails.releaseDate ? phoneDetails.releaseDate : 'undefined'
+        }</h4>
+        `;
+  exploreDetails.appendChild(div);
+};
 
 // display search result
 const displaySearchResult = (phones) => {
   const searchResult = document.getElementById('search-result');
-  console.log(phones);
+  //   console.log(phones);
   //   clear search result div
   searchResult.textContent = '';
   if (phones == '') {
@@ -42,7 +68,7 @@ const displaySearchResult = (phones) => {
             <div class="card-body">
             <h5 class="card-title">${phone.phone_name}</h5>
             </div>
-            <button class="btn btn-outline-primary fw-bold w-75 mx-auto mb-3">Explore</button>
+            <button onclick="exploreDetails('${phone.slug}')" class="btn btn-outline-primary fw-bold w-75 mx-auto mb-3">Explore</button>
         </div>
     
         `;
