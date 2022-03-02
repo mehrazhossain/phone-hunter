@@ -2,6 +2,7 @@
 const searchPhone = () => {
   const searchField = document.getElementById('search-field');
   const searchText = searchField.value;
+
   if (searchField.value == '') {
     const searchFieldEmptyError = document.getElementById(
       'search-field-empty-error'
@@ -15,6 +16,7 @@ const searchPhone = () => {
       .then((res) => res.json())
       .then((allData) => displaySearchResult(allData.data));
   }
+  //   Clear search field
   searchField.value = '';
 };
 // explore more details
